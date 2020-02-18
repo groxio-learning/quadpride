@@ -5,6 +5,7 @@ defmodule Points do
       {2, 2}, 
       {2, 3}, {3, 3}, 
     ]
+    
   end
   def draw(:o) do
     [
@@ -31,10 +32,6 @@ defmodule Points do
       {2, 2},{2, 3},
              {3, 3},{3, 4},
     ]    
-  end
-  
-  def color(:z) do
-    :blue
   end
   
   def move_point({x, y}, {change_x, change_y}) do
@@ -116,20 +113,5 @@ defmodule Points do
     |> rotate(brick.rotation)
     |> reflect(brick.reflection)
     |> move(brick.location)
-    |> add_color(Tetris.Brick.color(brick))
   end
-  
-  def add_color(points, color) do
-    Enum.map(
-      points,
-      fn {x, y} -> 
-        {x,y,color}
-      end
-    )
-  end
-  
-  def add_color_to_point({x,y},color) do
-    {x,y,color}
-  end
-  
 end

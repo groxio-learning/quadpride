@@ -68,26 +68,4 @@ defmodule Tetris.Brick do
   def move_down(brick) do
     %{brick| location: down(brick.location)}
   end
-  
-  def color(%{name: :l, reflection: true}) do
-    :blue
-  end
-  def color(%{name: :l, reflection: false}) do
-    :red
-  end
-  def color(%{name: :z, reflection: true}) do
-    :yellow
-  end
-  def color(%{name: :z, reflection: false}) do
-    :green
-  end
-  def color(%{name: :t}) do
-    :orange
-  end
-  def color(%{name: :o}) do
-    :pink
-  end
-  def color(%{name: :i}) do
-    :purple
-  end
 end
