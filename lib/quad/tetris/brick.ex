@@ -89,5 +89,5 @@ defmodule Tetris.Brick do
   end
   def color(%{name: :i}) do
     :purple
-  end
+  end 
 end
