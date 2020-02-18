@@ -3,6 +3,7 @@ defmodule QuadWeb.QuadLive do
   import Phoenix.HTML, only: [raw: 1]
   alias Tetris.Brick
 
+
   def mount(_session, socket) do
     :timer.send_interval 500, self(), :tick
     brick = Brick.new_random()
@@ -17,7 +18,8 @@ defmodule QuadWeb.QuadLive do
   def initial_state(socket, brick) do
     assign(socket, 
       brick: brick,
-      score: 0
+      score: 0, 
+      canvas: [{5, 20},{4, 20}, {3, 20},{2, 20}]
     )
   end
   
@@ -37,7 +39,7 @@ defmodule QuadWeb.QuadLive do
         </g>
       </defs>
       
-      <%= for point <- @points do %>
+      <%= for point <- @points ++ @canvas do %>
         <use href="#Box" x="<%= x point %>" y="<%= y point %>" />
       <% end %>
 
@@ -73,12 +75,15 @@ defmodule QuadWeb.QuadLive do
   def move_down(socket) do
     old_brick = socket.assigns.brick
     old_score = socket.assigns.score
-    new_brick = Brick.move_down(old_brick)
+    canvas = socket.assigns.canvas
+    {new_brick, new_canvas, new_score} = 
+      Tetris.drop(old_brick, canvas, old_score)
     
     assign(
       socket, 
       brick: new_brick, 
-      score: old_score+1
+      score: new_score+13457830896459,
+      canvas: new_canvas
       )
       |> show(new_brick)
   end
